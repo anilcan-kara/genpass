@@ -1,0 +1,30 @@
+# export MSYS_NO_PATHCONV=1; docker run -it --rm -e TZ="Europe/Istanbul" -e LANG="tr_TR.UTF_8" -e LANGUAGE="tr_TR.tr" -e LC_ALL="tr_TR.utf8" --user $(id -u):$(id -g) -v $(pwd):/usr/src/app --workdir /usr/src/app
+
+# docker run -it --rm
+# -e TZ="Europe/Istanbul"
+# -e LANG="tr_TR.UTF_8"
+# -e LANGUAGE="tr_TR.tr"
+# -e LC_ALL="tr_TR.utf8"
+# --user $(id -u):$(id -g)
+# -v $(pwd):/usr/src/app
+# --workdir /usr/src/app
+
+version: "3.9"
+services:
+  genpass:
+    image: node:16-slim
+    container_name: genpass
+    network_mode: bridge
+    restart: always
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    ports:
+      - 3102:3000
+    environment:
+      - NODE_ENV=production
+      - TZ=Europe/Istanbul
+      - LANG=tr_TR.UTF_8
+      - LANGUAGE=tr_TR.tr
+      - LC_ALL=tr_TR.utf8
+    command: node .
