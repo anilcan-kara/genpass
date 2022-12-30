@@ -12,10 +12,10 @@
 version: "3.9"
 services:
   genpass:
-    image: node:16-slim
+    image: node:lts-alpine
     container_name: genpass
     network_mode: bridge
-    restart: always
+    # restart: always
     volumes:
       - .:/usr/src/app
     working_dir: /usr/src/app
